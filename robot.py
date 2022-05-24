@@ -1,10 +1,6 @@
 from time import sleep
-from browser import Browser
-from verve import VerveWebsite
+from __init__ import *
 
-
-browser = Browser()
-verve = VerveWebsite(browser)
 
 verve.log_in()
 verve.open_edit_panel()

@@ -20,7 +20,8 @@ class VerveWebsite:
 
     def click_to_duplicate(self):
         self.browser.move_mouse("tbody#the-list tr:nth-child(2)")
-        self.browser.click_element("tbody#the-list tr:nth-child(2) a[title='Duplicar comodraft']")
+        self.browser.click_element(
+            "tbody#the-list tr:nth-child(2) a[title='Duplicar comodraft']")
 
     def open_inline_edit_options(self):
         print("open inline editor")
