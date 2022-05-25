@@ -35,3 +35,7 @@ class Browser:
 
     def maximize(self):
         self.driver.maximize_window()
+
+    def get_anchor_href(self, selector):
+        el = self.driver.find_element(By.CSS_SELECTOR, f"a{selector}")
+        return el.get_attribute('href')

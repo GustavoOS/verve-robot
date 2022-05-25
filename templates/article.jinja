@@ -1,0 +1,102 @@
+<!-- wp:buttons -->
+<div class="wp-block-buttons">
+    <!-- wp:button {"textColor":"black","width":100,"style":{"color":{"background":"#ec8e5b"}}} -->
+    <div class="wp-block-button has-custom-width wp-block-button__width-100"><a
+            class="wp-block-button__link has-black-color has-text-color has-background" href="{{link}}"
+            style="background-color:#ec8e5b" target="_blank" rel="noreferrer noopener">QUER VER ESSE CONTEÚDO EM VÍDEO?
+            CLIQUE AQUI</a></div>
+    <!-- /wp:button -->
+</div>
+<!-- /wp:buttons -->
+
+<!-- wp:heading {"level":3} -->
+<h3>PRIMEIROS ANOS</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+{{paragraphs[0]}}
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>VIDA E OBRA</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+{{paragraphs[1]}}
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"align":"center","id":14004,"sizeSlug":"large","linkDestination":"none"} -->
+<div class="wp-block-image">
+    <figure class="aligncenter size-large"><img
+            src="https://vervecientifica.com.br/wp-content/uploads/2021/12/giroscope-960x540.jpg" alt=""
+            class="wp-image-14004" />
+        <figcaption>Euclides, o Pai da Geometria.&nbsp;Imagem: Wikimedia Commons.</figcaption>
+    </figure>
+</div>
+<!-- /wp:image -->
+
+{% for paragraph in paragraphs[2:-2] %}
+
+<!-- wp:paragraph -->
+{{paragraph}}
+<!-- /wp:paragraph -->
+
+{% endfor %}
+
+<!-- wp:image {"align":"center","id":14059,"width":768,"height":595,"sizeSlug":"large","linkDestination":"none"} -->
+<div class="wp-block-image">
+    <figure class="aligncenter size-large is-resized"><img
+            src="https://vervecientifica.com.br/wp-content/uploads/2021/12/wallece2-1024x793.jpeg" alt=""
+            class="wp-image-14059" width="768" height="595" />
+        <figcaption>Besouros coletados no Arquipélago Malaio por Wallace. Esta gaveta é de sua coleção particular de
+            insetos, agora no Museu de História Natural de Londres. Imagem: Museu de História Natural de Londres.
+        </figcaption>
+    </figure>
+</div>
+<!-- /wp:image -->
+
+<!-- wp:heading {"level":3} -->
+<h3>MORTE E LEGADO</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+{{paragraphs[-2]}}
+<!-- /wp:paragraph -->
+
+<!-- wp:pullquote {"align":"right","className":"is-style-solid-color"} -->
+<figure class="wp-block-pullquote alignright is-style-solid-color">
+    <blockquote>
+        <p></p><cite>Além do seu papel importante na Teoria da Evolução, Wallace foi o pai da biogeografia, se
+            destacando como o principal biólogo tropical de sua época.</cite>
+    </blockquote>
+</figure>
+<!-- /wp:pullquote -->
+
+<!-- wp:paragraph -->
+{{paragraphs[-1]}}
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>REFERÊNCIAS:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>
+    {% for reference in references %}{{reference}}<br />{% endfor %}
+</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons -->
+<div class="wp-block-buttons">
+    <!-- wp:button {"width":100,"style":{"color":{"text":"#292826","background":"#ec8e5b"}}} -->
+    <div class="wp-block-button has-custom-width wp-block-button__width-100"><a
+            class="wp-block-button__link has-text-color has-background" href="{{link}}"
+            style="background-color:#ec8e5b;color:#292826" target="_blank" rel="noreferrer noopener">ASSISTA AO
+            VÍDEO</a></div>
+    <!-- /wp:button -->
+</div>
+<!-- /wp:buttons -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->

@@ -24,11 +24,3 @@ class Parser:
         for p in paragraphs[index:]:
             p.extract()
         self.result['references'] = p_text[index + 1:]
-
-
-# Test
-parser = Parser()
-file = open("input.html", "r")
-content = file.read()
-file.close()
-parser.parse(content)
