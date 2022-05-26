@@ -11,7 +11,7 @@ class YoutubeWebsite:
         self.browser.go_to_site(
             f"https://www.youtube.com/results?search_query={param}")
         return transform_url_style(
-            self.browser.get_anchor_href("#video-title"))
+            self.browser.get_attribute("a#video-title", 'href'))
 
 
 def transform_url_style(url: str):

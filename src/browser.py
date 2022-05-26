@@ -1,5 +1,3 @@
-# selenium 4
-
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -36,6 +34,6 @@ class Browser:
     def maximize(self):
         self.driver.maximize_window()
 
-    def get_anchor_href(self, selector):
-        el = self.driver.find_element(By.CSS_SELECTOR, f"a{selector}")
-        return el.get_attribute('href')
+    def get_attribute(self, selector, attribute):
+        el = self.driver.find_element(By.CSS_SELECTOR, selector)
+        return el.get_attribute(attribute)
