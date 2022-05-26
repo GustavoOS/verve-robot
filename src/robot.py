@@ -2,14 +2,24 @@ from time import sleep
 
 from __init__ import *
 from article import mount_article
+from web.pensador import get_quote_link
 from web.wikimedia import WikiMedia
 
 
 
 def fetch_info(content):
     result = parser.parse(content)
-    result['link'] = youtube.search(f"verve {result['title']}")
-    result['images'] = finder.find_image(result['title'])
+    title = result['title']
+    result['link'] = youtube.search(f"verve {title}")
+    result['images'] = finder.find_image(title)
+    try:
+        result['quote'] = citation.find_quote(title)
+        reference_count = len(result['references'])
+        link = get_quote_link(result['title']).split("www.")[1]
+        result['references'].append(f"[{reference_count + 1}] {link}")
+    except:
+        result['quote'] = "Inserir citação aqui."
+
     return result
 
 

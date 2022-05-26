@@ -9,4 +9,5 @@ def mount_article(result):
         link=result['link'],
         paragraphs=result['body'],
         references=result['references'],
-        images=result['images'])
+        images=result['images'],
+        quote=result['quote'])
