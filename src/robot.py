@@ -3,8 +3,6 @@ from time import sleep
 from __init__ import *
 from article import mount_article
 from web.pensador import get_quote_link
-from web.wikimedia import WikiMedia
-
 
 
 def fetch_info(content):

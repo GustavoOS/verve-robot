@@ -1,7 +1,13 @@
+import os
 import urllib.parse
 
 import requests
 from browser import Browser
+from dotenv import load_dotenv
+
+load_dotenv()
+
+IMAGES_FOLDER = os.getenv('IMAGES_FOLDER')
 
 
 class YoutubeWebsite:
@@ -25,14 +31,14 @@ def transform_url_style(url: str):
     return f"https://youtu.be/{code}"
 
 
-def make_file_name(name: str, src: str):
+def generate_file_name(name: str, src: str):
     extension = src.split(".")[-1].strip()
     format_name = name.lower().replace(" ", "_")
-    return f"{format_name}.{extension}"
+    return f"{IMAGES_FOLDER}/{format_name}.{extension}"
 
 
 def download_image(name: str, src: str):
-    dir_name = f"../images/{make_file_name(name, src)}"
+    dir_name = f"{generate_file_name(name, src)}"
     r = requests.get(src, allow_redirects=True)
     open(dir_name, 'wb').write(r.content)
     return dir_name
