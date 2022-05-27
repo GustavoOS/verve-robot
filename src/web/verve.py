@@ -1,5 +1,12 @@
 
+import os
+
 from browser import Browser
+from dotenv import load_dotenv
+
+load_dotenv()
+VERVE_LOGIN = os.getenv('VERVE_LOGIN')
+VERVE_PASSWORD = os.getenv('VERVE_PASSWORD')
 
 
 class VerveWebsite:
@@ -8,9 +15,8 @@ class VerveWebsite:
 
     def log_in(self):
         self.browser.go_to_site("https://vervecientifica.com.br/wp-admin")
-        self.browser.fill_input("[type='text']", "verve.colab3@gmail.com")
-        self.browser.fill_input("[type='password']",
-                                "njo#g$mmESAvtgGd$NS4noOh")
+        self.browser.fill_input("[type='text']", VERVE_LOGIN)
+        self.browser.fill_input("[type='password']", VERVE_PASSWORD)
         self.browser.click_element("input[type='submit']")
 
     def open_edit_panel(self):
