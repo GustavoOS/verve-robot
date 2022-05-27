@@ -29,10 +29,11 @@ def fetch_info(content):
 # verve.open_inline_edit_options()
 
 # Test
-file = open("input.html", "r")
+file = open("../input.html", "r")
 content = file.read()
 file.close()
 result = fetch_info(content)
+print(result['link'])
 print(mount_article(result))
 
 sleep(30)

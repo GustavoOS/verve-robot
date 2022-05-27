@@ -34,6 +34,6 @@ class Browser:
     def maximize(self):
         self.driver.maximize_window()
 
-    def get_attribute(self, selector, attribute):
-        el = self.driver.find_element(By.CSS_SELECTOR, selector)
-        return el.get_attribute(attribute)
+    def get_attribute(self, selector, attribute, index=0):
+        el = self.driver.find_elements(By.CSS_SELECTOR, selector)
+        return el[index].get_attribute(attribute)

@@ -6,7 +6,7 @@ def mount_article(result):
     template = env.get_template('article.jinja')
     return template.render(
         title= result['title'],
-        link=result['link'],
+        link=result['link']['url'],
         paragraphs=result['body'],
         references=result['references'],
         images=result['images'],
