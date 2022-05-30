@@ -2,6 +2,7 @@ from time import sleep
 
 from __init__ import *
 from article import mount_article
+from utill import get_title_tags
 from web.pensador import get_quote_link
 
 
@@ -21,17 +22,21 @@ def fetch_info(content):
     return result
 
 
-# verve.log_in()
-# verve.open_edit_panel()
-# verve.click_to_duplicate()
-# verve.open_inline_edit_options()
-
 # Test
 file = open("../input.html", "r")
 content = file.read()
 file.close()
 result = fetch_info(content)
-print(result['link'])
-print(mount_article(result))
+article = mount_article(result)
+
+verve.log_in()
+verve.open_edit_panel()
+verve.click_to_duplicate()
+verve.open_inline_edit_options()
+verve.fill_inline_edit_options(
+    result['title'], get_title_tags(result['title']) +
+    ", Cientista, verve, verve científica")
+verve.open_edit_page()
+verve.fill_page(article)
 
 sleep(30)

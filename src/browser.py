@@ -14,7 +14,7 @@ class Browser:
         self.driver = driver
 
     def fill_input(self, selector, text):
-        el = self.driver.find_element(By.CSS_SELECTOR, f"input{selector}")
+        el = self.driver.find_element(By.CSS_SELECTOR, selector)
         el.send_keys(str(text))
 
     def click_element(self, selector):
@@ -37,3 +37,11 @@ class Browser:
     def get_attribute(self, selector, attribute, index=0):
         el = self.driver.find_elements(By.CSS_SELECTOR, selector)
         return el[index].get_attribute(attribute)
+
+    def clear(self, selector):
+        self.driver.find_element(By.CSS_SELECTOR, selector).clear()
+
+    def clear_and_fill(self, selector, text):
+        el = self.driver.find_element(By.CSS_SELECTOR, selector)
+        el.clear()
+        el.send_keys(text)

@@ -1,5 +1,6 @@
 
 import os
+from time import sleep
 
 from browser import Browser
 from dotenv import load_dotenv
@@ -15,8 +16,8 @@ class VerveWebsite:
 
     def log_in(self):
         self.browser.go_to_site("https://vervecientifica.com.br/wp-admin")
-        self.browser.fill_input("[type='text']", VERVE_LOGIN)
-        self.browser.fill_input("[type='password']", VERVE_PASSWORD)
+        self.browser.fill_input("input[type='text']", VERVE_LOGIN)
+        self.browser.fill_input("input[type='password']", VERVE_PASSWORD)
         self.browser.click_element("input[type='submit']")
 
     def open_edit_panel(self):
@@ -34,3 +35,27 @@ class VerveWebsite:
         self.browser.move_mouse("tbody#the-list tr:nth-child(1)")
         self.browser.click_element(
             "tbody#the-list tr:nth-child(1) button.editinline")
+
+    def fill_inline_edit_options(self, title, tags):
+        self.browser.clear_and_fill("input.ptitle", title)
+        self.browser.clear_and_fill(
+            "textarea[data-wp-taxonomy='post_tag']", tags)
+        self.browser.click_element("button.save")
+
+    def open_edit_page(self):
+        url = self.browser.get_attribute(
+            "tbody#the-list tr:nth-child(1) span.edit > a", "href")
+        sleep(2)
+        self.browser.go_to_site(url)
+        self.browser.click_element("button[aria-label='Fechar janela']")
+        self.browser.click_element("button[aria-label='Opções']")
+        self.browser.click_element(
+            "button.components-button.components-menu-item__button" +
+            ".components-menu-items-choice[aria-checked='false']")
+
+    def fill_page(self, page: str):
+        print(page)
+        area = "textarea.editor-post-text-editor"
+        self.browser.clear(area)
+        for line in page.splitlines(True):
+            self.browser.fill_input(area, line)
