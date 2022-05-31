@@ -54,11 +54,7 @@ class VerveWebsite:
 
     def fill_page(self, page: str):
         area = "textarea.editor-post-text-editor"
-        chnk_len = round(len(page)/5)
-        slices = [page[slice_start: min(len(page), slice_start + chnk_len)]
-                  for slice_start in range(0, len(page), chnk_len)]
         sleep(1)
         self.browser.clear(area)
-        for slice in slices:
-            pyperclip.copy(slice)
-            self.browser.paste(area)
+        pyperclip.copy(page)
+        self.browser.paste(area)
