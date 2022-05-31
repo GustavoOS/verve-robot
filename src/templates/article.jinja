@@ -27,7 +27,7 @@
 <!-- wp:image {"align":"center","id":14004,"sizeSlug":"large","linkDestination":"none"} -->
 <div class="wp-block-image">
     <figure class="aligncenter size-large"><img
-            src="{{images[0]}}" alt=""
+            src="{{images[0]}}" alt="{{title}}"
             class="wp-image-14004" />
         <figcaption>{{title}}. Imagem: Wikimedia Commons.</figcaption>
     </figure>
@@ -45,7 +45,7 @@
 <!-- wp:image {"align":"center","id":14059,"width":768,"height":595,"sizeSlug":"large","linkDestination":"none"} -->
 <div class="wp-block-image">
     <figure class="aligncenter size-large is-resized"><img
-            src="{{images[1]}}" alt=""
+            src="{{images[1]}}" alt="{{title}}"
             class="wp-image-14059" width="768" height="595" />
         <figcaption>{{title}}. Imagem: Wikimedia Commons.
         </figcaption>
@@ -80,7 +80,8 @@
 
 <!-- wp:paragraph -->
 <p>
-    {% for reference in references %}{{reference}}<br />{% endfor %}
+{% for reference in references %}
+{{reference}}<br />{% endfor %}
 </p>
 <!-- /wp:paragraph -->
 

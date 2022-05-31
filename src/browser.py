@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.utils import ChromeType
 
@@ -17,9 +18,9 @@ class Browser:
         el = self.driver.find_element(By.CSS_SELECTOR, selector)
         el.send_keys(str(text))
 
-    def click_element(self, selector):
-        el = self.driver.find_element(By.CSS_SELECTOR, selector)
-        el.click()
+    def click_element(self, selector, n=0):
+        el = self.driver.find_elements(By.CSS_SELECTOR, selector)
+        el[n].click()
 
     def move_mouse(self, arg):
         print("Moving the cursor to the element")
@@ -45,3 +46,7 @@ class Browser:
         el = self.driver.find_element(By.CSS_SELECTOR, selector)
         el.clear()
         el.send_keys(text)
+
+    def paste(self, selector):
+        el = self.driver.find_element(By.CSS_SELECTOR, selector)
+        el.send_keys(Keys.CONTROL, 'v')

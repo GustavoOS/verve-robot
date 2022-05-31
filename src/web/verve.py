@@ -1,7 +1,7 @@
-
 import os
 from time import sleep
 
+import pyperclip
 from browser import Browser
 from dotenv import load_dotenv
 
@@ -50,12 +50,15 @@ class VerveWebsite:
         self.browser.click_element("button[aria-label='Fechar janela']")
         self.browser.click_element("button[aria-label='Opções']")
         self.browser.click_element(
-            "button.components-button.components-menu-item__button" +
-            ".components-menu-items-choice[aria-checked='false']")
+            ".components-menu-group:nth-child(2) button", -1)
 
     def fill_page(self, page: str):
-        print(page)
         area = "textarea.editor-post-text-editor"
+        chnk_len = round(len(page)/5)
+        slices = [page[slice_start: min(len(page), slice_start + chnk_len)]
+                  for slice_start in range(0, len(page), chnk_len)]
+        sleep(1)
         self.browser.clear(area)
-        for line in page.splitlines(True):
-            self.browser.fill_input(area, line)
+        for slice in slices:
+            pyperclip.copy(slice)
+            self.browser.paste(area)
