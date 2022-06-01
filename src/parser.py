@@ -8,7 +8,7 @@ class Parser:
         self.soup = BeautifulSoup(doc, 'html.parser')
         self.extract_title()
         self.get_references(self.soup.find_all('p'))
-        self.result['body'] = self.soup.find_all('p')
+        self.extract_paragraphs()
         return self.result
 
     def extract_title(self):
@@ -24,3 +24,7 @@ class Parser:
         for p in paragraphs[index:]:
             p.extract()
         self.result['references'] = p_text[index + 1:]
+
+    def extract_paragraphs(self):
+        self.result['body'] = list(
+            map(lambda el: el.get_text().strip().replace("\n", "").replace("  ", " "), self.soup.find_all('p')))
