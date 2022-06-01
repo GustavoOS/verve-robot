@@ -23,7 +23,7 @@ def fetch_info(content):
 
 
 # Test
-file = open("../input.html", "r")
+file = open("input.html", "r")
 content = file.read()
 file.close()
 result = fetch_info(content)
