@@ -38,5 +38,7 @@ verve.fill_inline_edit_options(
     ", Cientista, verve, verve científica")
 verve.open_edit_page()
 verve.fill_page(article)
+verve.change_outstand_image(result['link']['img'])
+verve.define_seo(result["title"])
 
 sleep(30)
