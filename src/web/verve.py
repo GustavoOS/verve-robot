@@ -85,12 +85,14 @@ class VerveWebsite:
         sleep(5)
         self.browser.click_element("button.media-button")
 
-    def define_seo(self, seo: str):
-        self.browser.clear_and_fill("input#focus-keyword-input-metabox", seo)
+    def define_seo(self, title: str, seo: str):
+        self.browser.clear_and_fill("input#focus-keyword-input-metabox",
+                                    f"Quem foi {title} ?")
         self.browser.scroll_into_view(
             "button#yoast-seo-analysis-collapsible-metabox")
-        metadescription = "div#yoast-google-preview-description-metabox div.public-DraftStyleDefault-block"
+        metadescription = "div#yoast-google-preview-description-metabox " + \
+            "div.public-DraftStyleDefault-block"
         self.browser.click_element(metadescription)
         self.browser.select_all(metadescription)
-        self.browser.fill_input(metadescription, seo)
+        self.browser.fill_input(metadescription, f"Descubra quem foi {seo}.")
         self.browser.click_element("button[aria-label='Salvar rascunho']")

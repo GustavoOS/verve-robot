@@ -39,6 +39,6 @@ verve.fill_inline_edit_options(
 verve.open_edit_page()
 verve.fill_page(article)
 verve.change_outstand_image(result['link']['img'])
-verve.define_seo(result["link"]["seo"])
+verve.define_seo(result["title"], result["link"]["seo"])
 
 sleep(30)
