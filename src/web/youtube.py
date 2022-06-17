@@ -20,10 +20,13 @@ class YoutubeWebsite:
             f"https://www.youtube.com/results?search_query={param}")
         img_src = self.browser.get_attribute(
             "#img", 'src', 1).split("?")[0].strip()
+        video_a = "a#video-title"
         return {
             'img': download_image(name, img_src),
             'url': transform_url_style(
-                self.browser.get_attribute("a#video-title", 'href'))}
+                self.browser.get_attribute(video_a, 'href')),
+            'seo': self.browser.get_attribute(video_a, "title")
+        }
 
 
 def transform_url_style(url: str):

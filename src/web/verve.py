@@ -1,5 +1,6 @@
 import os
 import pathlib
+from sys import platform
 from time import sleep
 
 import pyperclip
@@ -9,6 +10,8 @@ from dotenv import load_dotenv
 load_dotenv()
 VERVE_LOGIN = os.getenv('VERVE_LOGIN')
 VERVE_PASSWORD = os.getenv('VERVE_PASSWORD')
+
+SLASH = "\\" if platform == "win32" else "/"
 
 
 class VerveWebsite:
@@ -54,6 +57,7 @@ class VerveWebsite:
     def open_code_editor(self):
         is_visual_mode = self.browser.contains("div[role='textbox']")
         if is_visual_mode:
+            sleep(2)
             self.browser.click_element("button[aria-label='Opções']")
             self.browser.click_element(
                 ".components-menu-group:nth-child(2) button", -1)
@@ -76,21 +80,17 @@ class VerveWebsite:
         self.browser.click_element(
             ".editor-post-featured-image button.is-secondary")
         self.browser.click_element("button#menu-item-upload")
-        file = str(pathlib.Path().resolve()) + "/" + img
+        file = str(pathlib.Path().resolve()) + SLASH + img
         self.browser.fill_input("input[type='file']", file)
         sleep(5)
         self.browser.click_element("button.media-button")
 
-    def define_seo(self, title: str):
-        print(title)
-        self.browser.clear_and_fill("input#focus-keyword-input-metabox",
-                                    f"Quem foi {title}?")
+    def define_seo(self, seo: str):
+        self.browser.clear_and_fill("input#focus-keyword-input-metabox", seo)
         self.browser.scroll_into_view(
             "button#yoast-seo-analysis-collapsible-metabox")
         metadescription = "div#yoast-google-preview-description-metabox div.public-DraftStyleDefault-block"
         self.browser.click_element(metadescription)
         self.browser.select_all(metadescription)
-        self.browser.fill_input(metadescription,
-                                 f"Descubra quem foi {title} e suas contribuições para a ciência.")
-        # TODO save draft
-            
+        self.browser.fill_input(metadescription, seo)
+        self.browser.click_element("button[aria-label='Salvar rascunho']")
