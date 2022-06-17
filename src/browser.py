@@ -24,11 +24,9 @@ class Browser:
         el[n].click()
 
     def move_mouse(self, selector):
-        print("Moving the cursor to the element")
         action = ActionChains(self.driver)
         action.move_to_element(self.driver.find_element(
             By.CSS_SELECTOR, selector)).perform()
-        print("Cursor moved to the element")
 
     def go_to_site(self, site):
         self.driver.get(site)
@@ -57,13 +55,14 @@ class Browser:
         actions = ActionChains(self.driver)
         actions.move_to_element(target)
         actions.perform()
-        print("scroll")
 
     def contains(self, selector: str):
         el = self.driver.find_element(By.CSS_SELECTOR, selector)
-        print("CONTAINS ", el is not None)
         return el is not None
 
     def select_all(self, selector: str):
         el = self.driver.find_element(By.CSS_SELECTOR, selector)
         el.send_keys(CONTROL + "a" + CONTROL)
+
+    def close(self):
+        self.driver.quit()
