@@ -29,7 +29,11 @@ class Pensador:
 
     def parse_shares(self, shares, i):
         try:
-            return int(shares[i].strip().split(" ")[0])
+            text = shares[i].strip().split(" ")[0]
+            splited = text.split(".")
+            if len(splited) > 1:
+                return int(f"{splited[0]}{splited[1]}000")
+            return int(text)
         except:
             return 0
 
