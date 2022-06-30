@@ -18,8 +18,9 @@ class YoutubeWebsite:
         param = urllib.parse.quote(name)
         self.browser.go_to_site(
             f"https://www.youtube.com/results?search_query={param}")
+        index = 1 if self.browser.contains(".badge-style-type-ad") else 0
         img_src = self.browser.get_attribute(
-            "#img", 'src', 1).split("?")[0].strip()
+            "#img", 'src', 1 + index).split("?")[0].strip()
         video_a = "a#video-title"
         return {
             'img': download_image(name, img_src),
@@ -36,7 +37,7 @@ def transform_url_style(url: str):
 
 def generate_file_name(name: str, src: str):
     extension = src.split(".")[-1].strip()
-    format_name = name.lower().replace(" ", "_")
+    format_name = name.lower().replace(" ", "_").replace("/", "_").replace("\\", "_")
     return f"{IMAGES_FOLDER}/{format_name}.{extension}"
 
 

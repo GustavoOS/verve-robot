@@ -14,20 +14,24 @@ class Pensador:
         return quote
 
     def extract_quotes(self):
-        authors = self.get_elements_inner_text('#phrasesList > div > span > a')
-        shares = self.get_elements_inner_text(
-            '#phrasesList > div > div > div:nth-child(1) > div.total-shares')
-        quotes = self.get_elements_inner_text('#phrasesList > div > p.frase')
+        authors = self.get_elements_inner_text('.phrases-list .autor a')
+        shares = self.get_elements_inner_text('.phrases-list .total-shares')
+        quotes = self.get_elements_inner_text('.phrases-list .frase')
         self.quotes = []
-
         for i in range(len(authors)):
             self.quotes.append(
                 {
                     'author': authors[i].strip(),
-                    'shares': int(shares[i].strip().split(" ")[0]),
+                    'shares': self.parse_shares(shares, i),
                     'quote': quotes[i].strip().replace("\n", "")
                 }
             )
+
+    def parse_shares(self, shares, i):
+        try:
+            return int(shares[i].strip().split(" ")[0])
+        except:
+            return 0
 
     def get_elements_inner_text(self, selector):
         result = self.soup.select(selector)
@@ -35,7 +39,7 @@ class Pensador:
 
     def select_quote(self, author: str):
         self.quotes = list(
-            filter(lambda q: q['author'] == author, self.quotes))
+            filter(lambda q: q['author'] == author and q['shares'] > 0, self.quotes))
         if len(self.quotes) == 0:
             raise Exception(f"No quotes were found for {author}")
         self.quotes.sort(key=lambda q: q['shares'], reverse=True)

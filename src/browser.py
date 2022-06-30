@@ -9,19 +9,21 @@ from sys import platform
 CONTROL = Keys.COMMAND if platform == "darwin" else Keys.CONTROL
 
 class Browser:
+    wait = 30
+
     def __init__(self):
         driver = webdriver.Chrome(service=Service(
             ChromeDriverManager().install()))
-        driver.implicitly_wait(30)
+        driver.implicitly_wait(self.wait)
         self.driver = driver
 
     def fill_input(self, selector: str, text: str):
         el = self.driver.find_element(By.CSS_SELECTOR, selector)
         el.send_keys(text)
 
-    def click_element(self, selector, n=0):
+    def click_element(self, selector, index=0):
         el = self.driver.find_elements(By.CSS_SELECTOR, selector)
-        el[n].click()
+        el[index].click()
 
     def move_mouse(self, selector):
         action = ActionChains(self.driver)
@@ -57,8 +59,10 @@ class Browser:
         actions.perform()
 
     def contains(self, selector: str):
-        el = self.driver.find_element(By.CSS_SELECTOR, selector)
-        return el is not None
+        self.driver.implicitly_wait(0)
+        el = self.driver.find_elements(By.CSS_SELECTOR, selector)
+        self.driver.implicitly_wait(self.wait)
+        return len(el) != 0
 
     def select_all(self, selector: str):
         el = self.driver.find_element(By.CSS_SELECTOR, selector)

@@ -20,10 +20,13 @@ class Parser:
 
     def get_references(self, paragraphs):
         p_text = list(map(lambda p: p.get_text().strip(), paragraphs))
-        index = p_text.index("Referências:")
-        for p in paragraphs[index:]:
-            p.extract()
-        self.result['references'] = p_text[index + 1:]
+        try:
+            index = p_text.index("Referências:")
+            for p in paragraphs[index:]:
+                p.extract()
+            self.result['references'] = p_text[index + 1:]
+        except:
+            self.result['references'] = ["* Sem referências"]
 
     def extract_paragraphs(self):
         self.result['body'] = list(

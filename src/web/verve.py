@@ -59,6 +59,7 @@ class VerveWebsite:
         if is_visual_mode:
             sleep(2)
             self.browser.click_element("button[aria-label='Opções']")
+            sleep(2)
             self.browser.click_element(
                 ".components-menu-group:nth-child(2) button", -1)
             self.browser.click_element("button[aria-label='Opções']")
@@ -77,22 +78,33 @@ class VerveWebsite:
         self.browser.click_element(
             ".components-panel__body:nth-child(7) button")
         self.browser.scroll_into_view(resumo)
+        sleep(2)
         self.browser.click_element(
             ".editor-post-featured-image button.is-secondary")
         self.browser.click_element("button#menu-item-upload")
         file = str(pathlib.Path().resolve()) + SLASH + img
         self.browser.fill_input("input[type='file']", file)
-        sleep(5)
-        self.browser.click_element("button.media-button")
+        sleep(10)
+        try:
+            self.browser.click_element("button.media-button")
+        except:
+            sleep(20)
+            self.browser.click_element("button.media-button")
 
     def define_seo(self, title: str, seo: str):
         self.browser.clear_and_fill("input#focus-keyword-input-metabox",
                                     f"Quem foi {title} ?")
-        self.browser.scroll_into_view(
-            "button#yoast-seo-analysis-collapsible-metabox")
         metadescription = "div#yoast-google-preview-description-metabox " + \
             "div.public-DraftStyleDefault-block"
-        self.browser.click_element(metadescription)
+        sleep(2)
+        self.browser.scroll_into_view(metadescription)
+        sleep(5)
+        try:
+            self.browser.click_element(metadescription)
+        except:
+            sleep(30)
+            self.browser.click_element(metadescription)
         self.browser.select_all(metadescription)
         self.browser.fill_input(metadescription, f"Descubra quem foi {seo}.")
         self.browser.click_element("button[aria-label='Salvar rascunho']")
+        sleep(5)
