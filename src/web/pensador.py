@@ -1,7 +1,8 @@
+import traceback
 import urllib.parse
-from bs4 import BeautifulSoup
 
 import requests
+from bs4 import BeautifulSoup
 
 
 class Pensador:
@@ -11,6 +12,7 @@ class Pensador:
         self.soup = BeautifulSoup(site, 'html.parser')
         self.extract_quotes()
         quote = self.select_quote(author)
+        print("quote is ", quote)
         return quote
 
     def extract_quotes(self):
@@ -29,13 +31,18 @@ class Pensador:
 
     def parse_shares(self, shares, i):
         try:
-            text = shares[i].strip().split(" ")[0]
-            splited = text.split(".")
-            if len(splited) > 1:
-                return int(f"{splited[0]}{splited[1]}000")
-            return int(text)
+            return self.parse_int(shares[i])
         except:
+            print("Error fetching phrase")
+            traceback.print_exc()
             return 0
+
+    def parse_int(self, number):
+        text = number.strip().split(" ")[0]
+        splited = text.split(".")
+        if len(splited) > 1:
+            return int(f"{splited[0]}{splited[1]}00")
+        return int(text)
 
     def get_elements_inner_text(self, selector):
         result = self.soup.select(selector)
@@ -43,7 +50,8 @@ class Pensador:
 
     def select_quote(self, author: str):
         self.quotes = list(
-            filter(lambda q: q['author'] == author and q['shares'] > 0, self.quotes))
+            filter(lambda q: q['author'].lower() == author.lower()
+                   and q['shares'] > 0, self.quotes))
         if len(self.quotes) == 0:
             raise Exception(f"No quotes were found for {author}")
         self.quotes.sort(key=lambda q: q['shares'], reverse=True)
