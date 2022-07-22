@@ -16,6 +16,8 @@ O robô serve para automatizar o processo de submissão de um artigo para a plat
 
 ## Instalação
 
+### Robô
+
 Antes de tudo, é preciso que o Python 3 esteja instalado. Siga esse [tutorial de instalação](https://tutorial.djangogirls.org/pt/python_installation/) caso não tenha instalado.
 
 
@@ -38,3 +40,9 @@ sudo apt install xsel
 ```
 - Mac: Faz uso dos comandos pbcopy e pbpaste, que devem vir instalados no navegador
 - Windows: não é necessário nenhum módulo adicional
+
+### Pandoc
+
+Utilizado para converter o artigo do formato do Word para HTML.
+
+Baixe o [instalador](https://github.com/jgm/pandoc/releases/tag/2.18) para o seu sistema operacional e o execute para instalar.
