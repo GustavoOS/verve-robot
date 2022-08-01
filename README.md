@@ -30,7 +30,10 @@ pip3 install -r requirements.txt
 ```
 
 Como o projeto utiliza o [pyperclip](https://pypi.org/project/pyperclip/) para copiar (equivalente ao famoso Ctrl + C), se atente à seguintes restrições:
-- Linux: Faz uso do xclip ou xsel. Garanta a instalação de um deles rodando no terminal (no caso do Ubuntu/Debian)
+
+#### Linux
+
+Faz uso do xclip ou xsel. Garanta a instalação de um deles rodando no terminal (no caso do Ubuntu/Debian)
 ```console
 sudo apt install xclip
 ```
@@ -38,11 +41,34 @@ ou
  ```console
 sudo apt install xsel
 ```
-- Mac: Faz uso dos comandos pbcopy e pbpaste, que devem vir instalados no navegador
-- Windows: não é necessário nenhum módulo adicional
+#### Mac
+
+ Faz uso dos comandos pbcopy e pbpaste, que devem vir instalados no navegador
+#### Windows
+
+Não é necessário nenhum módulo adicional
 
 ### Pandoc
 
 Utilizado para converter o artigo do formato do Word para HTML.
 
 Baixe o [instalador](https://github.com/jgm/pandoc/releases/tag/2.18) para o seu sistema operacional e o execute para instalar.
+
+#### Convertendo um único arquivo
+Imagine que o arquivo de entrada se chame euclides.docx e esteja dentro da pasta input. Para converter o documento e adicioná-lo na pasta converted (que precisa existir previamente), execute o seguinte comando:
+
+```sh
+pandoc -f docx  input/euclides.docx -t html -o converted/euclides.html
+```
+
+#### Convertendo vários arquivos de uma vez
+
+Para processar um lote de arquivos, execute o script bash abaixo. Para rodar script bash no Windows, execute em um terminal que interprete bash, como o git Bash (veja [Como instalar Git Bash no Windows](https://www.webdevdrops.com/git-bash-como-instalar-usar/) )
+
+```sh
+for file in input/*; do
+    name=$(echo "$file" | cut -f 1 -d '.')
+    cat $file | pandoc -f docx -t html > $name.html
+done
+mv input/*.html converted/.
+```
