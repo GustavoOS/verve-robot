@@ -63,9 +63,10 @@ pandoc -f docx  input/euclides.docx -t html -o converted/euclides.html
 
 #### Convertendo vários arquivos de uma vez
 
-Para processar um lote de arquivos, execute o script bash abaixo. Para rodar script bash no Windows, execute em um terminal que interprete bash, como o git Bash (veja [Como instalar Git Bash no Windows](https://www.webdevdrops.com/git-bash-como-instalar-usar/) )
+Para processar um lote de arquivos que estão dentro da pasta input para colocá-los dentro da pasta converted (que não precisa estar previamente criada), execute o script bash abaixo. Para rodar script bash no Windows, execute em um terminal que interprete bash, como o git Bash (veja [Como instalar Git Bash no Windows](https://www.webdevdrops.com/git-bash-como-instalar-usar/) )
 
 ```sh
+mkdir -p converted
 for file in input/*; do
     name=$(echo "$file" | cut -f 1 -d '.')
     cat $file | pandoc -f docx -t html > $name.html
@@ -91,7 +92,11 @@ As pastas templates e images são configuráveis, podendo ser configuradas nesse
 
 - Criação da pasta de imagens
 
-Crie a pasta de imagens, onde serão baixadas as imagens da thumbnail dos vídeos. O nome desta pasta deverá ser images, e deverá estar na mesma pasta que esta documentação.
+Crie a pasta de imagens, onde serão baixadas as imagens da thumbnail dos vídeos. O nome desta pasta deverá ser images, e deverá estar na mesma pasta que esta documentação. No terminal shell, essa criação pode ser feita através do seguinte comando
+
+```sh
+mkdir -p images
+```
 
 ## Executando o script
 
