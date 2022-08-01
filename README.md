@@ -35,6 +35,12 @@ Instale as dependências do projeto, com o seguinte comando no terminal
 pip3 install -r requirements.txt
 ```
 
+ou
+
+```console
+pip install -r requirements.txt
+```
+
 Como o projeto utiliza o [pyperclip](https://pypi.org/project/pyperclip/) para copiar (equivalente ao famoso Ctrl + C), se atente à seguintes restrições:
 
 #### Linux
