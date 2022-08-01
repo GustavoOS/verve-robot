@@ -67,7 +67,9 @@ Utilizado para converter o artigo do formato do Word para HTML.
 Baixe o [instalador](https://github.com/jgm/pandoc/releases/tag/2.18) para o seu sistema operacional e o execute para instalar.
 
 #### Convertendo um único arquivo
-Imagine que o arquivo de entrada se chame euclides.docx e esteja dentro da pasta input. Para converter o documento e adicioná-lo na pasta converted (que precisa existir previamente), execute o seguinte comando:
+Imagine que o arquivo de entrada se chame euclides.docx e esteja dentro da pasta input. Para converter o documento e adicioná-lo na pasta converted (que precisa existir previamente), execute o  comando abaixo. Atenção:
+- Os nomes dos arquivos não devem possuir espaços
+- No Windows, as barras "/" devem estar invertidas "\" 
 
 ```sh
 pandoc -f docx  input/euclides.docx -t html -o converted/euclides.html
@@ -78,12 +80,13 @@ pandoc -f docx  input/euclides.docx -t html -o converted/euclides.html
 Para processar um lote de arquivos que estão dentro da pasta input para colocá-los dentro da pasta converted (que não precisa estar previamente criada), execute o script bash abaixo. Para rodar script bash no Windows, execute em um terminal que interprete bash, como o git Bash (veja [Como instalar Git Bash no Windows](https://www.webdevdrops.com/git-bash-como-instalar-usar/) )
 
 ```sh
-mkdir -p converted
-for file in input/*; do
-    name=$(echo "$file" | cut -f 1 -d '.')
-    cat $file | pandoc -f docx -t html > $name.html
+mkdir -p converted #Cria pasta converted
+for f in input/*; do mv "$f" "${f// /_}" 2>/dev/null; done #Troca espaços por _ em nomes de arquivos
+for file in input/*; do #Itera em todos os arquivos
+    name=$(echo "$file" | cut -f 1 -d '.') #Nome do arquivo sem a extensão
+    cat $file | pandoc -f docx -t html > $name.html #Conversão do arquivo
 done
-mv input/*.html converted/.
+mv input/*.html converted/. #Move arquivos gerados para pasta converted
 ```
 
 ### Configurando ambiente
