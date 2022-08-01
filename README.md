@@ -72,3 +72,37 @@ for file in input/*; do
 done
 mv input/*.html converted/.
 ```
+
+### Configurando ambiente
+
+- É preciso ter o Chrome instalado na máquina
+
+- Arquivo de ambiente
+
+Para ser fácil alterar as senhas, caso necessário, isolamos as senhas em um arquivo que denominamos ".env" que deve ser colocado na mesma pasta que esta documentação. Deve ser preenchido desta maneira:
+
+```sh
+VERVE_LOGIN="insira o login aqui"
+VERVE_PASSWORD="insira a senha aqui"
+TEMPLATES="src/templates"
+IMAGES="images"
+```
+As pastas templates e images são configuráveis, podendo ser configuradas nesse arquivo .env
+
+- Criação da pasta de imagens
+
+Crie a pasta de imagens, onde serão baixadas as imagens da thumbnail dos vídeos. O nome desta pasta deverá ser images, e deverá estar na mesma pasta que esta documentação.
+
+## Executando o script
+
+Rode o seguinte comando:
+
+```sh
+python3 src/robot.py
+```
+
+ou
+
+```sh
+python src/robot.py
+```
