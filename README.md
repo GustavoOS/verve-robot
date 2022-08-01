@@ -14,6 +14,12 @@ O robô serve para automatizar o processo de submissão de um artigo para a plat
 1. O sistema processa o próximo arquivo
 
 
+## Atenção
+
+Todos os scripts descritos nessa documentação presumem que serão executados na mesma pasta que está essa documentação. Recomenda-se abrir este projeto no [Visual Studio Code](https://code.visualstudio.com/) e abrir o terminal integrado antes de se executar os comandos.
+
+Todos os comandos foram testados no Linux, no Ubuntu.
+
 ## Instalação
 
 ### Robô
